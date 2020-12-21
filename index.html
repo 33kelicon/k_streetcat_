@@ -25,8 +25,8 @@
     <style type="text/css">
     	html {scroll-behavior: smooth;}
     	body{background: linear-gradient(white,white,#FAED7D);}
-        section{width:1300px;height: 900px;margin: auto;position: relative;}
-        h1,h2,p,a{ font-family: 'Gaegu', cursive; }
+        section{overflow:hidden; width:1300px;height: 900px;margin: auto;position: relative;}
+        h1,h2,p,a,#start{ font-family: 'Gaegu', cursive; }
         a{display: block; color:black;text-decoration: none;text-align: center;}
 
         .title{text-align: center;font-weight:lighter;font-size: 2.5em
@@ -346,20 +346,32 @@ scrlloamount="10">
 
 </section>
 
+
 <section class="square">
 	<p class="lasttitle">우리 함께 살아오🐾</p>
     <img src="catwalk.gif" style="width: 400px;position: absolute;top: 470px;left: 200px;">
 	<img src="hellocat.gif" style="width:500px;position: absolute;left: 890px;top: 150px;">
-	<div id="rect" class="drop"><img src="paws3.png" style="width: 200px;position: absolute;left: 550px;top: 800px;"></div>
-	<button type="button" class="rect" id="up"><img src="catfoot.png" style="width: 50px;" ><a href="#a1" class="start">맨위로</a></button>
+    <img src="catfoot.png" style="width: 50px;" >
+
+    <!--먼저 맨위로 버튼을 놓고 이름(id)을 start로 지정-->
+    <div id="start" style="cursor:pointer; position: absolute;left:560px;top:520px;font-weight: 900;font-size: 1.5em;">🐾맨위로</div>
+    <!--그다음 고앙이발을 놓고 이름을 ttl로 지정(발이 바닥에 붙으니 top이 아니라 bottom으로 해야돼-->
+    <img src="paws3.png" style="width: 200px;position: absolute;left: 550px;bottom: -300px;" id="ttl">
  
 </section>
+<style>
+    /* 그다음 고양이발 올라오는 애니메이션이야 일단 멈춰있어야 하니 paused를 넣어줘야해*/
+    #ttl{animation: 1s pawmove linear forwards paused;}
+    @keyframes pawmove{ to{ bottom:0; } }
+</style>
 </body>
 <script type="text/javascript">
-        // 애니메이션을 실행하는 버튼
-        start.onclick = function(){ rect.style.animationPlayState = "running"; }
-        rect.onanimationend =  function(){location.href="a1";}   
+        // 버튼을 누르면 paused >> running으로 전화하면 애니메이션 시작 
+        start.onclick = function(){ ttl.style.animationPlayState = "running"; }
+        // 고방이발의 애니메이션이 끝나면 #ai이라는 아이디를 가진 곳으로 간다.
+        ttl.onanimationend =  function(){ location.href="#a1"; }   
 
-
-    </script>
+        //이렇게하면 끝!!! 그리고 정선아 section에 overflow:hidden을 주면 section밖으로
+        //튀어나오는 애들을 가려주거든? 그래서 한결 깔끔해져 !!
+</script>
 </html>
